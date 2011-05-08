@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
+gem 'sqlite3-ruby'
+gem 'database_cleaner'
 gem 'haml-rails'
 gem 'cucumber', '>=0.10.0'
 gem 'cucumber-rails'
@@ -9,3 +11,4 @@ gem 'factory_girl_rails'
 gem 'rspec', '>=2.5.0'
 gem 'rspec-rails', '>=2.5.0'
 gem 'metric_fu'
+gem 'rcov'
