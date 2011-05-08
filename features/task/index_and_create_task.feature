@@ -8,7 +8,7 @@ Jellemző: Feladatok listázása, létrehozása
 
   Forgatókönyv: Egy feladat létrehozása érvényes adatokkal
     Amennyiben a feladatok listázásának oldalán vagyok
-    Ha ráklikkelek az "Új Feladat" létrehozása linkre
+    Ha ráklikkelek az "Új Feladat létrehozása" linkre
     Akkor azt kell látnom az új feladat létrehozásának opciói között, hogy "Cím"
     És azt kell látnom az új feladat létrehozásának opciói között, hogy "Leírás"
     És azt kell látnom az új feladat létrehozásának opciói között, hogy "Határidő"
