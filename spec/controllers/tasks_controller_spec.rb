@@ -6,7 +6,7 @@ describe TasksController do
 
     it { should assign_to(:tasks) }
     it { should render_template('tasks/index') }
-    it { should respond_with(200) }
+    it { should respond_with(:success) }
   end
 
   describe "GET #show" do
@@ -15,6 +15,22 @@ describe TasksController do
 
     it { should assign_to(:task) }
     it { should render_template('tasks/show') }
-    it { should respond_with(200) }
+    it { should respond_with(:success) }
+  end
+
+  describe "POST #create with valid attributes" do
+    before(:each) { post :create, :task => { :title => "New Example Task", :priority => 5 } }
+
+    it { should assign_to(:task) }
+    it { should redirect_to(tasks_path) }
+    xit { should set_the_flash.to(:notice => 'Task has been successfully created!') }
+  end
+
+  describe "POST #create with invalid title" do
+    before(:each) { post :create, :task => { :title => "A", :priority => 5 } }
+
+    it { should assign_to(:task) }
+    it { should render_template('tasks/new') }
+    it { should respond_with(:not_acceptable) }
   end
 end
