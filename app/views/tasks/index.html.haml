@@ -1,0 +1,11 @@
+%h1= t('Tasks')
+%ul.tasks
+  %li.new
+    = form_for :task do |f|
+      %span.title= f.text_field :title
+      %span.submit= f.submit
+  - @tasks.each do |task|
+    %li{ :class => "priority-#{task.priority.to_s}" }
+      %span.priority= task.priority
+      %span.title=    task.title
+      %span.due_at= l(task.due_at) rescue ''
