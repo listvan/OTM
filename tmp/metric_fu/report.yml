@@ -1,0 +1,291 @@
+--- 
+:churn: 
+  :changes: 
+  - :file_path: Gemfile
+    :times_changed: 6
+  - :file_path: .gitignore
+    :times_changed: 4
+  - :file_path: app/controllers/tasks_controller.rb
+    :times_changed: 3
+  - :file_path: config/routes.rb
+    :times_changed: 3
+  - :file_path: features/task/index_and_create_task.feature
+    :times_changed: 3
+  :class_churn: []
+
+  :method_churn: []
+
+  :changed_files: 
+  - features/task/index_and_create_task.feature
+  :changed_classes: []
+
+  :changed_methods: []
+
+:flay: 
+  :total_score: "0"
+  :matches: []
+
+:reek: 
+  :matches: 
+  - :file_path: app/controllers/application_controller.rb
+    :code_smells: 
+    - :method: ApplicationController
+      :message: has no descriptive comment
+      :type: IrresponsibleModule
+  - :file_path: app/controllers/tasks_controller.rb
+    :code_smells: 
+    - :method: TasksController
+      :message: has no descriptive comment
+      :type: IrresponsibleModule
+    - :method: TasksController#create
+      :message: calls flash twice
+      :type: Duplication
+    - :method: TasksController#create
+      :message: has approx 7 statements
+      :type: LongMethod
+  - :file_path: app/helpers/application_helper.rb
+    :code_smells: []
+
+  - :file_path: app/models/task.rb
+    :code_smells: 
+    - :method: Task
+      :message: has no descriptive comment
+      :type: IrresponsibleModule
+:roodi: 
+  :total: 
+  - Found 0 errors.
+  :problems: []
+
+:rcov: 
+  app/helpers/application_helper.rb: 
+    :lines: 
+    - :content: module ApplicationHelper
+      :was_run: false
+    - :content: end
+      :was_run: true
+    :percent_run: 50
+    :methods: {}
+
+  app/controllers/application_controller.rb: 
+    :lines: 
+    - :content: class ApplicationController < ActionController::Base
+      :was_run: false
+    - :content: "  protect_from_forgery"
+      :was_run: true
+    - :content: end
+      :was_run: true
+    :percent_run: 67
+    :methods: {}
+
+  app/models/task.rb: 
+    :lines: 
+    - :content: class Task < ActiveRecord::Base
+      :was_run: false
+    - :content: "  belongs_to :parent, :class_name => 'Task', :foreign_key => :parent_id"
+      :was_run: true
+    - :content: "  has_many   :children, :class_name => 'Task', :foreign_key => :parent_id"
+      :was_run: true
+    - :content: "  validates :title, :presence => true, :length => { :in => 3..250 }"
+      :was_run: false
+    - :content: "  validates :description, :length => { :maximum => 2.kilobytes }"
+      :was_run: true
+    - :content: "  validates :priority, :numericality => { :only_integer => true }, :presence => true"
+      :was_run: true
+    - :content: end
+      :was_run: true
+    :percent_run: 71
+    :methods: {}
+
+  app/controllers/tasks_controller.rb: 
+    :lines: 
+    - :content: class TasksController < ApplicationController
+      :was_run: false
+    - :content: "  respond_to :html"
+      :was_run: true
+    - :content: "  def index"
+      :was_run: false
+    - :content: "    @tasks = Task.all"
+      :was_run: true
+    - :content: "    respond_with(@tasks)"
+      :was_run: true
+    - :content: "  end"
+      :was_run: true
+    - :content: "  def show"
+      :was_run: false
+    - :content: "    @task = Task.find(params[:id])"
+      :was_run: true
+    - :content: "    respond_with(@task)"
+      :was_run: true
+    - :content: "  end"
+      :was_run: true
+    - :content: "  def create"
+      :was_run: false
+    - :content: "    @task = Task.new(params[:task])"
+      :was_run: true
+    - :content: "    Task.transaction do"
+      :was_run: true
+    - :content: "      @task.save!"
+      :was_run: true
+    - :content: "      flash[:notice] = t('models.task.created_successfully')"
+      :was_run: true
+    - :content: "      redirect_to(tasks_path)"
+      :was_run: true
+    - :content: "    end"
+      :was_run: true
+    - :content: "  rescue ActiveRecord::RecordInvalid"
+      :was_run: false
+    - :content: "    flash[:error] = t('models.task.create_failed')"
+      :was_run: false
+    - :content: "    render :action => :new, :status => :not_acceptable"
+      :was_run: true
+    - :content: "  end"
+      :was_run: true
+    - :content: end
+      :was_run: true
+    :percent_run: 73
+    :methods: 
+      TasksController#index: 25.0
+      TasksController#show: 25.0
+      TasksController#create: 27.27272727272727
+  :global_percent_run: 70.6
+:flog: 
+  :total: 36.77938356126267
+  :average: 6.129897260210445
+  :method_containers: 
+  - :name: TasksController
+    :path: app/controllers/tasks_controller.rb
+    :total_score: 28.604383561262665
+    :highest_score: 19.289375313887184
+    :average_score: 7.151095890315666
+    :methods: 
+      TasksController#none: 
+        :operators: 
+          :respond_to: 1.1
+        :score: 1.1
+        :path: 
+      TasksController#index: 
+        :operators: 
+          :assignment: 1.2000000000000002
+          :all: 1.2000000000000002
+          :respond_with: 1.2000000000000002
+        :score: 2.683281572999748
+        :path: app/controllers/tasks_controller.rb:4
+      TasksController#show: 
+        :operators: 
+          :assignment: 1.2000000000000002
+          :params: 1.6
+          :[]: 1.4000000000000001
+          :find: 1.2000000000000002
+          :respond_with: 1.2000000000000002
+        :score: 5.531726674375733
+        :path: app/controllers/tasks_controller.rb:9
+      TasksController#create: 
+        :operators: 
+          :branch: 2.6000000000000005
+          :assignment: 4.400000000000002
+          :params: 1.8000000000000005
+          :[]: 1.6000000000000005
+          :new: 1.4000000000000006
+          :transaction: 1.4000000000000006
+          :save!: 1.6000000000000008
+          :flash: 3.0000000000000018
+          :t: 3.0000000000000018
+          :tasks_path: 1.800000000000001
+          :redirect_to: 1.600000000000001
+          :render: 1.4000000000000008
+        :score: 19.289375313887184
+        :path: app/controllers/tasks_controller.rb:14
+  - :name: Task
+    :path: ""
+    :total_score: 7.175000000000003
+    :highest_score: 7.175000000000003
+    :average_score: 7.175000000000003
+    :methods: 
+      Task#none: 
+        :operators: 
+          :belongs_to: 1.1000000000000005
+          :has_many: 1.1000000000000005
+          :validates: 3.3000000000000016
+          :lit_fixnum: 0.3750000000000001
+          :kilobytes: 1.3000000000000005
+        :score: 7.175000000000003
+        :path: 
+  - :name: ApplicationController
+    :path: ""
+    :total_score: 1.0
+    :highest_score: 1.0
+    :average_score: 1.0
+    :methods: 
+      ApplicationController#none: 
+        :operators: 
+          :protect_from_forgery: 1.0
+        :score: 1.0
+        :path: 
+:stats: 
+  :codeLOC: 34
+  :testLOC: 99
+  :code_to_test_ratio: 2.9
+  :lines: 
+  - :name: Controllers
+    :lines: 29
+    :loc: 25
+    :classes: 2
+    :methods: 3
+    :methods_per_class: 1
+    :loc_per_method: 6
+  - :name: Helpers
+    :lines: 2
+    :loc: 2
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Models
+    :lines: 8
+    :loc: 7
+    :classes: 1
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Libraries
+    :lines: 0
+    :loc: 0
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Model specs
+    :lines: 51
+    :loc: 31
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: View specs
+    :lines: 28
+    :loc: 20
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Controller specs
+    :lines: 36
+    :loc: 28
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Routing specs
+    :lines: 25
+    :loc: 20
+    :classes: 0
+    :methods: 0
+    :methods_per_class: 0
+    :loc_per_method: 0
+  - :name: Total
+    :lines: 179
+    :loc: 133
+    :classes: 3
+    :methods: 3
+    :methods_per_class: 1
+    :loc_per_method: 42
