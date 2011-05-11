@@ -1,2 +1,7 @@
 en:
   Tasks: Tasks
+
+  models:
+    task:
+      created_successfully: Task has been created successfully!
+      create_failed: Failed to create task!

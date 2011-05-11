@@ -7,3 +7,4 @@ config/database.yml
 config/cucumber.yml
 Gemfile.lock
 public/stylesheets/*.css
+.*.swp

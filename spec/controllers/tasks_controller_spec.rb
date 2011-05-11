@@ -23,7 +23,7 @@ describe TasksController do
 
     it { should assign_to(:task) }
     it { should redirect_to(tasks_path) }
-    xit { should set_the_flash.to(:notice => 'Task has been successfully created!') }
+    it { should set_the_flash.to('models.task.created_successfully') }
   end
 
   describe "POST #create with invalid title" do
@@ -32,5 +32,6 @@ describe TasksController do
     it { should assign_to(:task) }
     it { should render_template('tasks/new') }
     it { should respond_with(:not_acceptable) }
+    it { should set_the_flash.to('models.task.create_failed') }
   end
 end

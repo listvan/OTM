@@ -6,4 +6,9 @@
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
+    - if flash[:notice] or flash[:error]
+      %div.notifications
+        - %w{ notice error }.each do |severity|
+          - next unless m=flash[severity.to_sym]
+          %p(class=severity)= t(m)
     = yield
