@@ -1,7 +1,15 @@
 # encoding: utf-8
 
+Amennyiben /^a rendszerben van egy példa feladat$/ do
+  Factory.create :task
+end
+
 Amennyiben /^az? (.+(?:on|en|án|én|n)) vagyok$/ do |page_name|                  
   Given %{I am on #{page_name}}
+end
+
+Ha /^az? (.+(?:ra|re)) megyek$/ do |page_name|
+  When %{I go to #{page_name}}
 end
 
 Akkor /^az? (.+(?:on|en|án|én|n)) kell lennem$/ do |page_name| 
@@ -52,6 +60,17 @@ Akkor /^sikeres választ kell kapnom$/ do
     assert page.has_xpath?('//div[@id="container"]')
     assert page.has_no_xpath?('//*[@id="notifications"]/*[@class="error"]')
   end
+end
+
+Akkor /^hibát kell kapnom$/ do
+  if page.respond_to? :should 
+    page.should have_xpath('//div[@id="container"]')
+    page.should have_xpath('//*[@id="notifications"]/*[@class="error"]')
+  else
+    assert page.has_xpath?('//div[@id="container"]')
+    assert page.has_xpath?('//*[@id="notifications"]/*[@class="error"]')
+  end
+
 end
 
 Akkor /^látnom kell az?(?: (.+))? a következő (?:.*)$/ do |selector, table|
