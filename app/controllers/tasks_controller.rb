@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.all
+    @tasks = Task.scoped
     respond_with(@tasks)
   end
 

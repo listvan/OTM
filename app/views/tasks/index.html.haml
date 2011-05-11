@@ -6,7 +6,7 @@
       .title= f.text_field :title
       .submit= f.submit
       .push
-  - @tasks.each do |task|
+  - @tasks.order(:priority, :due_at).each do |task|
     %li{ :class => "priority-#{task.priority.to_s}" }
       .priority
         %span= task.priority
