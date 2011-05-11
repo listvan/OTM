@@ -35,16 +35,18 @@ div.notifications
     background-color: #ffe8e8
 
 // tasks
-h1, ul.tasks li
+h1, ul li
   &:hover
-    background-color: #ccf
+    background-color: #eef
 
-h1
+h1, ul.parent li, ul.task li, ul.children li
   padding: 5px
   border-left: 3px solid #aaa
   border-right: 3px solid #aaa
 
 ul.tasks
+  border-bottom: 1px dashed #aaa
+
   li
     float: left
     padding: 5px
@@ -69,3 +71,56 @@ ul.tasks
 
   li.new input
     border: 1px solid #aaa
+
+// task-form
+form ul.task, form ul.parent
+
+  // look-and-feel
+  label
+    font-size: 10px
+    border-bottom: 1px dotted #aaa
+    color: #888
+    margin-bottom: 5px
+
+  .title input
+    font-size: 24px
+    padding: 7px
+
+  select, input[type="text"], textarea, input[type="submit"]
+    border: 1px solid #aaa
+
+  .field_with_errors input
+    border-color: #f88 !important
+    background-color: #ffe0e0
+
+  // position
+  div.parent_id, div.priority, div.title, div.due_at, div.description,
+  label, select, input[type="text"], textarea, input[type="submit"]
+    float: left
+    display: block
+
+  label, select, input[type="text"], textarea, input[type="submit"]
+    clear: left
+
+  .priority
+    width: 60px
+
+  .title
+    width: 484px
+  .title input
+    width: 468px
+
+  .description textarea
+    width: 482px
+
+  .due_at
+    width: 100px
+
+  .submit
+    float: right
+  .submit input
+    margin-top: 19px
+
+// task-show
+ul.parent, ul.children, ul.task, ul.tasks
+  border-bottom: 1px dashed #aaa

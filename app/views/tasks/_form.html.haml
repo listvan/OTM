@@ -3,22 +3,30 @@
   %ul.preceding
   %ul.parent
     %li
-      = f.label :parent_id
-      = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
+      .parent_id
+        = f.label :parent_id
+        = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
+      .push
   %ul.task
     %li
-      = f.label :priority
-      = f.select :priority, (1..5).to_a.map{|p| [p, p]}
+      .title
+        = f.label :title
+        = f.text_field :title
+      .push
     %li
-      = f.label :title
-      = f.text_field :title
+      .priority
+        = f.label :priority
+        = f.select :priority, (1..5).to_a.map{|p| [p, p]}
+      .due_at
+        = f.label :due_at
+        = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
+      .submit
+        = f.submit
+      .push
     %li
-      = f.label :description
-      = f.text_area :description
-    %li
-      = f.label :due_at
-      = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
-    %li
-      = f.submit
+      .description
+        = f.label :description
+        = f.text_area :description
+      .push
   %ul.children
   %ul.following
