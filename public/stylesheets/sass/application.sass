@@ -1,0 +1,57 @@
+// resets
+html, body, h1, h2, h3, ul, form, img, p, div
+  padding: 0
+  margin: 0
+  outline: 0
+  border: 0
+
+li
+  list-style-type: none
+
+// basics
+html
+  font-size: 12px
+  font-family: Arial, sans-serif
+
+body
+  width: 500px
+  margin: 0 auto
+
+.push
+  clear: both
+
+// tasks
+h1, ul.tasks li
+  &:hover
+    background-color: #ccf
+
+h1
+  padding: 5px
+  border-left: 3px solid #aaa
+  border-right: 3px solid #aaa
+
+ul.tasks
+  li
+    float: left
+    padding: 5px
+    border-left: 3px solid #aaa
+    border-right: 3px solid #aaa
+
+  li > div, li > form > div
+    float: left
+
+    &.priority
+      width: 40px
+    &.title
+      width: 300px
+    &.due_at, &.submit
+      width: 144px
+
+  li > .priority
+    text-align: center
+
+    span
+      padding: 2px
+
+  li.new input
+    border: 1px solid #aaa

@@ -2,10 +2,14 @@
 %ul.tasks
   %li.new
     = form_for :task do |f|
-      %span.title= f.text_field :title
-      %span.submit= f.submit
+      .priority= f.select :priority, (1..5).to_a.map{ |p| [p, p]}
+      .title= f.text_field :title
+      .submit= f.submit
+      .push
   - @tasks.each do |task|
     %li{ :class => "priority-#{task.priority.to_s}" }
-      %span.priority= task.priority
-      %span.title=    task.title
-      %span.due_at= l(task.due_at) rescue ''
+      .priority
+        %span= task.priority
+      .title=  link_to task.title, task
+      .due_at= l(task.due_at) rescue ''
+      .push

@@ -1,0 +1,14 @@
+@mixin color_template($color)
+  .priority span
+    background-color: $color !important
+
+.priority-1
+  @include color_template(#ff8888)
+.priority-2
+  @include color_template(#ee77ee)
+.priority-3
+  @include color_template(#8888ff)
+.priority-4
+  @include color_template(#77eeee)
+.priority-5
+  @include color_template(#88ff88)
