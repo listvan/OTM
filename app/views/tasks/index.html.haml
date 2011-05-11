@@ -2,7 +2,7 @@
 %ul.tasks
   %li.new
     = form_for :task do |f|
-      .priority= f.select :priority, (1..5).to_a.map{ |p| [p, p]}
+      .priority= f.select :priority, (1..5).to_a.map{|p| [p, p]}
       .title= f.text_field :title
       .submit= f.submit
       .push

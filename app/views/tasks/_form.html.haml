@@ -1,1 +1,24 @@
 - task ||= @task
+= form_for task do |f| 
+  %ul.preceding
+  %ul.parent
+    %li
+      = f.label :parent_id
+      = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
+  %ul.task
+    %li
+      = f.label :priority
+      = f.select :priority, (1..5).to_a.map{|p| [p, p]}
+    %li
+      = f.label :title
+      = f.text_field :title
+    %li
+      = f.label :description
+      = f.text_area :description
+    %li
+      = f.label :due_at
+      = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
+    %li
+      = f.submit
+  %ul.children
+  %ul.following

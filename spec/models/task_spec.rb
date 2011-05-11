@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe Task do
@@ -40,6 +41,8 @@ describe Task do
   it { should have_db_column(:updated_at).of_type(:datetime) }
 
 
+  it { should respond_to(:to_s) }
+
   context "given valid attributes" do
     subject { described_class.new(Factory.attributes_for(:task)) }
 
@@ -47,5 +50,12 @@ describe Task do
     it("should be saved") do
       expect{ subject.save! }.should_not raise_error(ActiveRecord::RecordInvalid)
     end
+
+    its(:to_s) { should == "Example Task (5)" }
+  end
+
+  context "given a long title" do
+    subject { described_class.new(Factory.attributes_for(:task, :title => 'abcdefghijklmnopqrstuvwxyz')) }
+    its(:to_s) { should == "abcdefghijklmnopqrs… (5)" }
   end
 end

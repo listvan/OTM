@@ -1,5 +1,6 @@
 en:
   Tasks: Tasks
+  Select a parent task: Select a parent task
 
   models:
     task:
