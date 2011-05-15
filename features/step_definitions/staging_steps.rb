@@ -54,21 +54,17 @@ end
 
 Akkor /^sikeres választ kell kapnom$/ do
   if page.respond_to? :should                                                
-    page.should have_xpath('//div[@id="container"]')
-    page.should have_no_xpath('//*[@id="notifications"]/*[@class="error"]')
+    page.should have_no_xpath('//*[@class="notifications"]/*[@class="error"]')
   else
-    assert page.has_xpath?('//div[@id="container"]')
-    assert page.has_no_xpath?('//*[@id="notifications"]/*[@class="error"]')
+    assert page.has_no_xpath?('//*[@class="notifications"]/*[@class="error"]')
   end
 end
 
 Akkor /^hibát kell kapnom$/ do
   if page.respond_to? :should 
-    page.should have_xpath('//div[@id="container"]')
-    page.should have_xpath('//*[@id="notifications"]/*[@class="error"]')
+    page.should have_xpath('//*[@class="notifications"]/*[@class="error"]')
   else
-    assert page.has_xpath?('//div[@id="container"]')
-    assert page.has_xpath?('//*[@id="notifications"]/*[@class="error"]')
+    assert page.has_xpath?('//*[@class="notifications"]/*[@class="error"]')
   end
 
 end

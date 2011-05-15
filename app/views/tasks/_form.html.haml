@@ -1,11 +1,10 @@
 - task ||= @task
 = form_for task do |f| 
-  %ul.preceding
   %ul.parent
     %li
       .parent_id
         = f.label :parent_id
-        = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
+        = f.select :parent_id, [[t('Select a parent task'), nil]] + @valid_parents.map{|t| [t.to_s, t.id]}
       .push
   %ul.task
     %li
@@ -20,13 +19,55 @@
       .due_at
         = f.label :due_at
         = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
-      .submit
-        = f.submit
       .push
     %li
       .description
         = f.label :description
         = f.text_area :description
+      .submit
+        = f.submit 'Mentés'
+        = link_to t('Cancel'), root_path
+      .push
+
+= form_for(@task.outgoing_dependencies.new) do |f|
+  %ul.dependency_by_me
+    %li
+      = f.label "This task must depend on:"
+      = f.select :subject, [[t('Select a dependent task'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
+      = f.submit 'Mentés'
+      .push
+  %ul.outgoing_dependencies
+    - task.outgoing_dependencies.each do |d_o|
+      %li
+        = Task.find(d_o.subject_id.to_i).title
+        = link_to t('Delete'), delete_dependency_path(d_o, :type => 'outgoing') 
+      .push
+
+= form_for(@task.incoming_dependencies.new) do |f|
+  %ul.dependecy_on_me
+    %li
+      = f.label "This task must depend by:"
+      = f.select :object, [[t('Select a dependent task'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
+      = f.submit 'Mentés'
+    .push
+  %ul.incoming_dependencies 
+    - task.incoming_dependencies.each do |d_i|
+      %li
+        = Task.find(d_i.object_id.to_i).title
+        = link_to t('Delete'), delete_dependency_path(d_i, :type => 'incoming') 
+      .push
+
+= form_for task, :url => { :action => "update" } do |c|      
+  %ul.child
+    %li
+      .children_id
+        = c.label :children
+        = c.select :children, [[t('Select a child task'), nil]] + @valid_children.map{|t| [t.to_s, t.id]}
+        = c.submit 'Mentés'
       .push
   %ul.children
-  %ul.following
+    - task.children.each do |child|
+      %li
+        = child.title
+        = link_to t('Delete'), delete_child_path(child)
+      .push

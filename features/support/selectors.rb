@@ -1,3 +1,4 @@
+# encoding: utf-8
 module HtmlSelectorsHelpers
   # Maps a name to a selector. Used primarily by the
   #
@@ -10,7 +11,15 @@ module HtmlSelectorsHelpers
 
     when /the page/
       "html > body"
+    
+    when /feladatok között/
+      "ul.tasks"
 
+    when /a hibaüzenetben/
+      ".notifications .error"
+    
+    when /a státusz üzenetek között/
+      ".notifications .notice"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

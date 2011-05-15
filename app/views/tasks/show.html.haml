@@ -1,0 +1,79 @@
+- task ||= @task
+- precedings ||= @precedings || nil
+- followings ||= @followings || nil
+- running ||=@running || false
+- running_process ||= @running_process || nil
+- finished_processes ||= @finished_processes || nil
+#preceding
+  %ul
+    -if precedings
+      -precedings.each do |p| 
+        %li
+          =p.title
+          =p.priority
+#task
+  %ul.parent
+    %li
+      .parent_id
+        .label= t('Parent')
+        .value= task.parent.title rescue ''
+      .push
+  %ul.task
+    %li
+      .title
+        .label= t('Title')
+        .value= task.title  
+      .push
+    %li
+      .priority
+        .label= t('Priority')
+        .value= task.priority  
+      .due_at
+        .label= t('Due At')
+        .value= task.due_at  
+      .push
+    %li
+      .description
+        .label= t('Description')
+        .value= task.description  
+      .push
+        
+  - if !@running
+      
+    = form_for task.processes.new do |p|      
+      %ul.processi_new
+        .label= t('Process')
+        %li
+          = p.submit 'Start'
+  -else
+    = form_for task.processes.new, :url => {:action => "update"} do |p|      
+      %ul.process_finish
+        %li
+          = p.text_field :description 
+          = p.submit 'Finish'
+        .push
+          
+  %ul.processes
+    - if finished_processes
+      - finished_processes.each do |process|
+        %li
+          = process.description
+        .push
+  
+  %ul.children
+    .label= t('Children')
+    - task.children.each do |c|
+      %li
+        = link_to c.title, task_path(c)
+        = c.priority
+
+  =link_to t('Homepage'), root_path      
+#following
+  %ul
+    -if followings
+      -followings.each do |p| 
+        %li
+          =p.title
+          =p.priority
+
+

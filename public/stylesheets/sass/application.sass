@@ -14,7 +14,7 @@ html
   font-family: Arial, sans-serif
 
 body
-  width: 500px
+  width: 900px
   margin: 0 auto
 
 .push
@@ -39,7 +39,7 @@ h1, ul li
   &:hover
     background-color: #eef
 
-h1, ul.parent li, ul.task li, ul.children li
+h1, ul.parent li, ul.task li, ul.children li,ul.child li, ul.dependency_by_me li, ul.outgoing_dependencies li, ul.dependecy_on_me li, ul.incoming_dependencies li 
   padding: 5px
   border-left: 3px solid #aaa
   border-right: 3px solid #aaa
@@ -59,9 +59,13 @@ ul.tasks
     &.priority
       width: 40px
     &.title
-      width: 300px
-    &.due_at, &.submit
+      width: 250px
+    &.edit
+      width: 50px
+    &.due_at
       width: 144px
+    &.submit
+
 
   li > .priority
     text-align: center
@@ -122,5 +126,31 @@ form ul.task, form ul.parent
     margin-top: 19px
 
 // task-show
+#preceding
+  float: left
+  width: 200px
+  
+  ul
+    padding-top: 30px
+#following
+  float: left
+  width: 170px
+  
+  ul
+    padding-top: 30px
+    padding-left: 10px
+
+#task
+  float: left
+  left: 200px
+  width: 500px
+
+
 ul.parent, ul.children, ul.task, ul.tasks
   border-bottom: 1px dashed #aaa
+  
+  li.title, li.priority
+    float: left
+    padding: 5px
+    border-left: 3px solid #aaa
+    border-right: 3px solid #aaa

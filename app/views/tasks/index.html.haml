@@ -4,12 +4,15 @@
     = form_for :task do |f|
       .priority= f.select :priority, (1..5).to_a.map{|p| [p, p]}
       .title= f.text_field :title
-      .submit= f.submit
+      .submit= f.submit 'Mentés'
       .push
   - @tasks.order(:priority, :due_at).each do |task|
     %li{ :class => "priority-#{task.priority.to_s}" }
       .priority
         %span= task.priority
       .title=  link_to task.title, task
-      .due_at= l(task.due_at) rescue ''
+      .edit=   link_to t('Edit'), edit_task_path(task)
+      .delete= link_to t('Delete'), task_path(task),:method => :delete     
+      .due_at= task.due_at.strftime("%Y-%m-%d") rescue ''
       .push
+      

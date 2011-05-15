@@ -1,0 +1,13 @@
+hu:
+  Tasks: Feladatok
+  Online Task Manager: Online Task Manager
+  Select a parent task: Válassza ki a szülő feladatot
+  Select a children task: Válassza ki a gyerek feladatot
+
+  Edit: Szerkesztés
+  Delete: Törlés  
+  
+  models:
+    task:
+      created_successfully: Az új feladat mentése sikeresen megtörtént
+      create_failed: A címnek legalább 3 karaktert kell tartalmaznia!
