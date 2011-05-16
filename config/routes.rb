@@ -17,6 +17,7 @@ Otm::Application.routes.draw do
   match '/tasks/:id/dependencies/:id', :to => 'dependencies#destroy', :as => 'delete_dependency'
 
   match '/tasks/:id/processes', :controller => 'Task::Process', :action => :create, :as => 'task_processes'
+  match '/tasks/:id/processes/:id', :controller => 'Task::Process', :action => :update
 
   root :to => "tasks#index"
 end

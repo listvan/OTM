@@ -39,32 +39,43 @@ h1, ul li
   &:hover
     background-color: #eef
 
-h1, ul.parent li, ul.task li, ul.children li,ul.child li, ul.dependency_by_me li, ul.outgoing_dependencies li, ul.dependecy_on_me li, ul.incoming_dependencies li 
+h1, ul.parent li, ul.task li, ul.children li,ul.child li, ul.dependency_by_me li, ul.outgoing_dependencies li, ul.dependency_on_me li, ul.incoming_dependencies li 
   padding: 5px
   border-left: 3px solid #aaa
   border-right: 3px solid #aaa
+  width: 500px
 
+ul.children
+  width: 512px
 ul.tasks
   border-bottom: 1px dashed #aaa
-
+  width: 512px 
   li
+    
+    width: 500px 
     float: left
     padding: 5px
     border-left: 3px solid #aaa
     border-right: 3px solid #aaa
-
+  
   li > div, li > form > div
     float: left
 
     &.priority
-      width: 40px
+      width: 60px
     &.title
-      width: 250px
+      width: 280px
     &.edit
       width: 50px
     &.due_at
-      width: 144px
+      width: 70px
     &.submit
+      padding-left: 20px
+    &.edit
+      padding-left: 20px
+    &.delete
+      width: 30px
+      float: right
 
 
   li > .priority
@@ -78,14 +89,14 @@ ul.tasks
 
 // task-form
 form ul.task, form ul.parent
-
+  width: 512px
   // look-and-feel
   label
     font-size: 10px
     border-bottom: 1px dotted #aaa
     color: #888
     margin-bottom: 5px
-
+  
   .title input
     font-size: 24px
     padding: 7px
@@ -132,18 +143,69 @@ form ul.task, form ul.parent
   
   ul
     padding-top: 30px
+    li
+      .label_title
+        font-size: 17px
+        border-bottom: 1px dotted #aaa
+        color: #888
+        margin-bottom: 5px
+        
+      padding-bottom: 20px
 #following
   float: left
-  width: 170px
+  width: 200px
   
   ul
     padding-top: 30px
-    padding-left: 10px
-
+    padding-left: 30px
+    
+    li
+      .label_title
+        font-size: 17px
+        border-bottom: 1px dotted #aaa
+        color: #888
+        margin-bottom: 5px
+       
+      padding-bottom: 20px
 #task
   float: left
   left: 200px
   width: 500px
+  
+  ul
+    .label
+      font-size: 10px
+      border-bottom: 1px dotted #aaa
+      color: #888
+      margin-bottom: 5px
+      width: 280px
+
+    .parent_id, .title, .description
+      .value
+        font-size: 15px
+        padding-top: 10px
+    .priority, .due_at
+      .value
+        padding-top: 1px
+        padding-bottom: 5px
+
+  ul.process_new, ul.process_finish
+    padding-top: 20px
+    .label
+      font-size: 20px
+   
+  ul.processes
+    li
+      padding-top: 10px
+      .label_finish
+        padding-top: 20px
+        font-size: 18px
+
+  ul.children
+    .label_child
+      padding-top: 20px
+      font-size: 18px
+
 
 
 ul.parent, ul.children, ul.task, ul.tasks

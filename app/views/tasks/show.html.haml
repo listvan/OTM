@@ -6,6 +6,8 @@
 - finished_processes ||= @finished_processes || nil
 #preceding
   %ul
+    %li
+      .label_title=t('Preceding Tasks')
     -if precedings
       -precedings.each do |p| 
         %li
@@ -29,7 +31,7 @@
         .label= t('Priority')
         .value= task.priority  
       .due_at
-        .label= t('Due At')
+        .label= t('due_at')
         .value= task.due_at  
       .push
     %li
@@ -37,39 +39,50 @@
         .label= t('Description')
         .value= task.description  
       .push
-        
+    %li
+      .edit=   link_to t('Edit'), edit_task_path(task)
+
   - if !@running
       
     = form_for task.processes.new do |p|      
-      %ul.processi_new
-        .label= t('Process')
-        %li
+      %ul.process_new
+        .label
+          = t('New Process')
           = p.submit 'Start'
   -else
-    = form_for task.processes.new, :url => {:action => "update"} do |p|      
+    = form_for running_process, :url => {:action => "update", :controller => "Task::Process"} do |p|      
       %ul.process_finish
         %li
-          = p.text_field :description 
+          .label=t('Running Process')
+        %li
+          .label_date=@running_process.started_at
+          = p.text_field :description
+          = hidden_field_tag :process_id, @running_process.id
           = p.submit 'Finish'
         .push
           
   %ul.processes
+    %li
+      .label_finish=t('Finished Processes')
     - if finished_processes
       - finished_processes.each do |process|
         %li
-          = process.description
+          .label= "#{process.started_at}  --> #{process.finished_at}"
+          .descripiton= "#{process.description}"
         .push
   
   %ul.children
-    .label= t('Children')
+    .label_child= t('Children')
     - task.children.each do |c|
       %li
         = link_to c.title, task_path(c)
         = c.priority
-
+  %br
   =link_to t('Homepage'), root_path      
 #following
   %ul
+    %li
+      .label_title=t('Following Tasks')
     -if followings
       -followings.each do |p| 
         %li

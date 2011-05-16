@@ -10,7 +10,7 @@ Jellemző: Feladatok listázása, létrehozása
     Amennyiben a rendszerben van egy példa feladat
     Ha a feladatokat listázó oldalra megyek
     Akkor látnom kell a feladatok között a következő feladatot:
-      | Example Task | 2011-05-16 | 5 |
+      | Example Task | 5 |
     Ha begépelem a "task[title]" mezőbe az "A" szöveget
     És megnyomom a "Mentés" gombot
     Akkor hibát kell kapnom
@@ -25,4 +25,4 @@ Jellemző: Feladatok listázása, létrehozása
     És azt kell látnom a státusz üzenetek között, hogy "Az új feladat mentése sikeresen megtörtént"
     És a feladatokat listázó oldalon kell lennem
     És látnom kell a feladatok között a következő feladatot:
-      | Ez egy új feladat | 2011-05-16 | 3 |
+      | Ez egy új feladat | 3 |

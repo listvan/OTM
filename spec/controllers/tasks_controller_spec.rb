@@ -22,7 +22,7 @@ describe TasksController do
     before(:each) { post :create, :task => { :title => "New Example Task", :priority => 5 } }
 
     it { should assign_to(:task) }
-    it { should redirect_to(tasks_path) }
+    it { should redirect_to(root_path) }
     it { should set_the_flash.to('models.task.created_successfully') }
   end
 

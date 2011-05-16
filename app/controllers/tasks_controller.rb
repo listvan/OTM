@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     @precedings = Array.new
     @followings = Array.new
     @finished_processes = Array.new
-    @running_process
+    @running_process = Task::Process.find(:first, :conditions => {:finished_at => nil})
     @running = false 
     @task.processes.each do |pro|
       if pro.finished_at.blank?
@@ -43,13 +43,12 @@ class TasksController < ApplicationController
       redirect_to(root_path)
   
   rescue ActiveRecord::RecordInvalid
-    flash.now[:error] = 'models.task.create_failed'
+    flash[:error] = 'models.task.create_failed'
     render :action => :new, :status => :not_acceptable
   end
 
   def edit
     @task = Task.find(params[:id])                                                                                                                                                             
-    @valid_parents  = Task.order(:title)-[@task] 
     @valid_children = Task.order(:title)-@task.children-[@task]
     @depend_by = Array.new
     @depend_on = Array.new

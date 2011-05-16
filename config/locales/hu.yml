@@ -2,12 +2,35 @@ hu:
   Tasks: Feladatok
   Online Task Manager: Online Task Manager
   Select a parent task: Válassza ki a szülő feladatot
-  Select a children task: Válassza ki a gyerek feladatot
+  Select a child task: Válassza ki a gyerek feladatot
+  Select a dependent task on: Válassza kitől függ
+  Select a dependent task by: Válassza ki függ tőle
 
+  Parent: Szülő
+  Title: Cím
+  Priority: Prioritás
+  due_at: Határidő
+  Description: Leírás
+  New Process: Új Folyamat Indítása
+  Running Process: Futó folyamat
+  Finished Processes: Befejezett folyamatok
   Edit: Szerkesztés
   Delete: Törlés  
-  
-  models:
-    task:
-      created_successfully: Az új feladat mentése sikeresen megtörtént
-      create_failed: A címnek legalább 3 karaktert kell tartalmaznia!
+  Cancel: Mégsem
+  Children: Gyerekek
+  Homepage: Vissza a Főoldalra
+  Preceding Tasks: Megelőző feladatok
+  Following Tasks: Következő feladatok
+
+
+  activerecord:
+    errors:
+      models:
+        task:
+          created_successfully: Az új feladat mentése sikeresen megtörtént
+          create_failed: A címnek legalább 3 karaktert kell tartalmaznia!
+          attributes:
+            title:
+              too_short: A címnek legalább 3 karaktert kell tartalmaznia!
+              blank: A címnek legalább 3 karaktert kell tartalmaznia!
+

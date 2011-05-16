@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => 'Task', :foreign_key => :parent_id
   has_many   :children, :class_name => 'Task', :foreign_key => :parent_id
 
-  has_many :processes
+  has_many :processes, :class_name => 'Task::Process', :foreign_key => :task_id
 
   has_many :outgoing_dependencies,                                                                                                                                                                   
     :dependent => :destroy,
@@ -26,4 +26,5 @@ class Task < ActiveRecord::Base
   def to_s
     %{#{title.truncate(20, :omission => '…')} (#{priority})}
   end
+require_dependency File.expand_path('../task/process.rb', __FILE__)
 end

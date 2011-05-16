@@ -12,7 +12,7 @@ describe "tasks/index.html.haml" do
 
   subject { render }
 
-  it { should have_xpath('//h1', :content => 'Tasks') }
+  it { should have_xpath('//h1', :content => 'Feladatok') }
 
   it { should have_xpath('//ul[@class="tasks"]/li[@class="new"]/form',
                          :method => 'post',
