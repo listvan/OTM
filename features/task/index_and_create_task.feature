@@ -18,7 +18,7 @@ Jellemző: Feladatok listázása, létrehozása
     És az új feladat létrehozásának az oldalán kell lennem
     Ha begépelem a "task[title]" mezőbe az "Ez egy új feladat" szöveget
     És begépelem a "task[description]" mezőbe a "Nagyon fontos feladat!" szöveget
-    És kiválasztom a "task[due_at]" mezőből a "2011-05-16" dátumot
+    És kiválasztom a "task[due_at]" mezőből a "2011-07-06" dátumot
     És kiválasztom a "task[priority]" mezőből a "3" opciót
     És megnyomom a "Mentés" gombot
     Akkor sikeres választ kell kapnom

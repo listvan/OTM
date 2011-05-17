@@ -23,14 +23,16 @@ hu:
   Following Tasks: Következő feladatok
 
 
-  activerecord:
-    errors:
-      models:
-        task:
-          created_successfully: Az új feladat mentése sikeresen megtörtént
-          create_failed: A címnek legalább 3 karaktert kell tartalmaznia!
-          attributes:
-            title:
-              too_short: A címnek legalább 3 karaktert kell tartalmaznia!
-              blank: A címnek legalább 3 karaktert kell tartalmaznia!
+  models:
+    task:
+      created_successfully: Az új feladat mentése sikeresen megtörtént
+      create_failed: A címnek legalább 3 karaktert kell tartalmaznia!
+      attributes:
+        title:
+          too_short: A címnek legalább 3 karaktert kell tartalmaznia!
+          blank: A címnek legalább 3 karaktert kell tartalmaznia!
+    
+    process:
+      created_successfully: Az új folyamat mentése sikeresen megtörtént
+      create_failed: Meg kell adnia a folyamat leírását!
 

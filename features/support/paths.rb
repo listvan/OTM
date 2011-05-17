@@ -13,6 +13,14 @@ module NavigationHelpers
       '/'
     when /új feladat létrehozásának az oldal.*/
       '/tasks'
+      
+    when /(.+) című feladat szerkesztésének az oldal.*/ 
+      "/tasks/#{Task.find_by_title($1).id}/edit"
+  
+    when/(.+) című feladat részletes oldal.*/
+      task = Task.find_by_title($1)
+      "/tasks/#{task.id}"
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

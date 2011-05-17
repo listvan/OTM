@@ -17,7 +17,13 @@ class DependenciesController < ApplicationController
       Dependency.create(:object => @obj, :subject => @object) if @obj
 
     end
+    flash[:notice] = 'models.dependency.created_successfully'
     redirect_to edit_task_path(@object)
+
+  rescue ActiveRecord::RecordInvalid
+    flash[:error] = 'models.dependency.create_failed'
+    render :action => :new, :status => :not_acceptable
+
   end
 
   def destroy
@@ -28,7 +34,11 @@ class DependenciesController < ApplicationController
       @task = @dependency.object
     end
     @dependency.destroy
+    flash[:notice] = 'models.dependency.deleted_successfully'
     redirect_to edit_task_path(@task)
 
+  rescue ActiveRecord::RecordInvalid
+    flash[:error] = 'models.dependency.deleted_failed'
+    redirect_to edit_task_path(@task)
   end
 end

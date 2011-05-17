@@ -1,72 +1,76 @@
 - task ||= @task
-= form_for task do |f| 
-  %ul.parent
-    %li
-      .parent_id
-        = f.label t('Parent')
-        = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
-      .push
-  %ul.task
-    %li
-      .title
-        = f.label t('Title')
-        = f.text_field :title
-      .push
-    %li
-      .priority
-        = f.label t('Priority')
-        = f.select :priority, (1..5).to_a.map{|p| [p, p]}
-      .due_at
-        = f.label t('due_at')
-        = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
-      .push
-    %li
-      .description
-        = f.label t('Description')
-        = f.text_area :description
-      .submit
-        = f.submit 'Mentés'
-      .push
-- if task.id != nil
-  = form_for(task.outgoing_dependencies.new) do |f|
-    %ul.dependency_by_me
-      %li
-        .label= f.label "A feladato a következőktől függ:"
-        = f.select :subject, [[t('Select a dependent task on'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
-        = f.submit 'Mentés'
-        .push
-    %ul.outgoing_dependencies
-      - task.outgoing_dependencies.each do |d_o|
-        %li
-          = Task.find(d_o.subject_id.to_i).title
-          = link_to t('Delete'), delete_dependency_path(d_o, :type => 'outgoing') 
-        .push
+#preceding
+  %ul   
+#task
 
-  = form_for(task.incoming_dependencies.new) do |f|
-    %ul.dependency_on_me
+  = form_for task do |f| 
+    %ul.parent
       %li
-        .label= f.label "A feladattól függenek a következők:"
-        = f.select :object, [[t('Select a dependent task by'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
-        = f.submit 'Mentés'
-      .push
-    %ul.incoming_dependencies 
-      - task.incoming_dependencies.each do |d_i|
-        %li
-          = Task.find(d_i.object_id.to_i).title
-          = link_to t('Delete'), delete_dependency_path(d_i, :type => 'incoming') 
+        .parent_id
+          = f.label t('Parent')
+          = f.select :parent_id, [[t('Select a parent task'), nil]] + Task.order(:title).map{|t| [t.to_s, t.id]}
         .push
+    %ul.task
+      %li
+        .title
+          = f.label t('Title')
+          = f.text_field :title
+        .push
+      %li
+        .priority
+          = f.label t('Priority')
+          = f.select :priority, (1..5).to_a.map{|p| [p, p]}
+        .due_at
+          = f.label t('due_at')
+          = f.select :due_at, ((d=Date.today)..(d+50)).to_a.map{|d| [d.to_s, d.to_s]}
+        .push
+      %li
+        .description
+          = f.label t('Description')
+          = f.text_area :description
+        .submit
+          = f.submit 'Mentés'
+        .push
+  - if task.id != nil
+    = form_for(task.outgoing_dependencies.new) do |f|
+      %ul.dependency_by_me
+        %li
+          .label= f.label "A feladattól függenek a következők:"
+          = f.select :subject, [[t('Select a dependent task by'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
+          = f.submit 'Mentés'
+          .push
+      %ul.outgoing_dependencies
+        - task.outgoing_dependencies.each do |d_o|
+          %li{:data_id => d_o.subject_id}
+            = Task.find(d_o.subject_id.to_i).title
+            = link_to t('Delete'), delete_dependency_path(d_o, :type => 'outgoing') 
+          .push
 
-  = form_for task, :url => { :action => "update" } do |c|      
-    %ul.child
-      %li
-        .children_id
-          .label= c.label 'Gyerekek'
-          = c.select :children, [[t('Select a child task'), nil]] + @valid_children.map{|t| [t.to_s, t.id]}
-          = c.submit 'Mentés'
-        .push
-    %ul.children
-      - task.children.each do |child|
+    = form_for(task.incoming_dependencies.new) do |f|
+      %ul.dependency_on_me
         %li
-          = child.title
-          = link_to t('Delete'), delete_child_path(child)
+          .label= f.label "A feladat függ a következőktől"
+          = f.select :object, [[t('Select a dependent task on'), nil]] + @valid_deps.map{|t| [t.to_s, t.id]}
+          = f.submit 'Mentés'
         .push
+      %ul.incoming_dependencies 
+        - task.incoming_dependencies.each do |d_i|
+          %li{:data_id => d_i.object_id }
+            = Task.find(d_i.object_id.to_i).title
+            = link_to t('Delete'), delete_dependency_path(d_i, :type => 'incoming') 
+          .push
+
+    = form_for task, :url => { :action => "update" } do |c|      
+      %ul.child
+        %li
+          .children_id
+            .label= c.label 'Gyerekek'
+            = c.select :children, [[t('Select a child task'), nil]] + @valid_children.map{|t| [t.to_s, t.id]}
+            = c.submit 'Mentés'
+          .push
+      %ul.children
+        - task.children.each do |child|
+          %li
+            = child.title
+            = link_to t('Delete'), delete_child_path(child)
+          .push

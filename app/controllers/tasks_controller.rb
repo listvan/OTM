@@ -73,8 +73,10 @@ class TasksController < ApplicationController
       @child.update_attribute(:parent_id, @task.id) if @child
     end
     if @child
+      flash.now[:notice] = 'models.task.child.create_success'
       redirect_to edit_task_path(@task)
     else
+      flash.now[:notice] = 'models.task.update_success'
       redirect_to(task_path)
     end
   rescue ActiveRecord::RecordInvalid
@@ -89,6 +91,7 @@ class TasksController < ApplicationController
     Task.transaction do
       @task.update_attribute(:parent_id, nil)
     end
+    flash.now[:notice] = 'models.task.child_delete_success'   
     redirect_to edit_task_path(@parent)
 
   end
@@ -96,6 +99,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
+    flash.now[:notice] = 'models.task.delete_success'   
     redirect_to root_path
   end
 

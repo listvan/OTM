@@ -1,7 +1,14 @@
 # encoding: utf-8
 
-Amennyiben /^a rendszerben van egy példa feladat$/ do
-  Factory.create :task
+Amennyiben /^a rendszerben van (.+) példa feladat$/ do |number|
+  case number
+  when 'egy'
+    Factory.create :task
+  when 'három'
+    Factory.create :task
+    Factory.create :task, :title => 'Example Task 2'
+    Factory.create :task, :title => 'Example Task 1'
+  end
 end
 
 Amennyiben /^az? (.+(?:on|en|án|én|n)) vagyok$/ do |page_name|                  
@@ -31,6 +38,13 @@ Akkor /^azt kell látnom(?: (.+))?, hogy "([^"]*)"$/ do |selector,text|
     Then %{I should see "#{text}"}
   end
 end
+Akkor /^nem szabad látnom(?: (.+))?, hogy "([^"]*)"$/ do |selector,text|
+  if selector
+    Then %{I should not see "#{text}" within #{selector}}
+  else                                                                          
+    Then %{I should not see "#{text}"}
+  end
+end
 
 Ha /^begépelem az?(?: (.+))? "([^"]*)" mezőbe az? "([^"]*)" szöveget$/ do |selector, field, text|                                                               
   if selector
@@ -40,7 +54,7 @@ Ha /^begépelem az?(?: (.+))? "([^"]*)" mezőbe az? "([^"]*)" szöveget$/ do |se
   end
 end  
 
-Ha /^kiválasztom az? "([^"]*)" mezőből a "([^"]*)" (?:.*)$/ do |field, value|   
+Ha /^kiválasztom az? "([^"]*)" mezőből az? "([^"]*)" (?:.*)$/ do |field, value|   
   When %{I select "#{value}" from "#{field}"}
 end
 

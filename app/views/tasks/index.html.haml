@@ -1,17 +1,20 @@
-%h1= t('Tasks')
-%ul.tasks
-  %li.new
-    = form_for :task do |f|
-      .priority= f.select :priority, (1..5).to_a.map{|p| [p, p]}
-      .title= f.text_field :title
-      .submit= f.submit 'Mentés'
-      .push
-  - @tasks.order(:priority, :due_at).each do |task|
-    %li{ :class => "priority-#{task.priority.to_s}" }
-      .priority
-        %span= task.priority
-      .title=  link_to task.title, task
-      .edit=   link_to t('Edit'), edit_task_path(task)
-      .delete= link_to t('Delete'), task_path(task),:method => :delete     
-      .push
-      
+#preceding
+  %ul   
+#task
+  %h1= t('Tasks')
+  %ul.tasks
+    %li.new
+      = form_for :task do |f|
+        .priority= f.select :priority, (1..5).to_a.map{|p| [p, p]}
+        .title= f.text_field :title
+        .submit= f.submit 'Mentés'
+        .push
+    - @tasks.order(:priority, :due_at).each do |task|
+      %li{ :class => "priority-#{task.priority.to_s}", :data_id => task.id }
+        .priority
+          %span= task.priority
+        .title=  link_to task.title, task
+        .edit=   link_to t('Edit'), edit_task_path(task)
+        .delete= link_to t('Delete'), task_path(task),:method => :delete     
+        .push
+        
