@@ -1,6 +1,7 @@
 # encoding: utf-8
 # language: hu
 @javascript
+@wip
 Jellemző: Feladatok listázása, létrehozása
   Abból a célból, hogy a kitűzött feladatokat be tudjuk tartani
   egyszerű felhasználóként

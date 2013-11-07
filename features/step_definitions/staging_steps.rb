@@ -3,11 +3,11 @@
 Amennyiben /^a rendszerben van (.+) példa feladat$/ do |number|
   case number
   when 'egy'
-    Factory.create :task
+    FactoryGirl.create :task
   when 'három'
-    Factory.create :task
-    Factory.create :task, :title => 'Example Task 2'
-    Factory.create :task, :title => 'Example Task 1'
+    FactoryGirl.create :task
+    FactoryGirl.create :task, :title => 'Example Task 2'
+    FactoryGirl.create :task, :title => 'Example Task 1'
   end
 end
 

@@ -4,5 +4,7 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 require 'cucumber/rake/task'
+require 'rdoc'
+require 'rdoc/task'
 
 Otm::Application.load_tasks
